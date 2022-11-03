@@ -14,14 +14,16 @@ class TrashService
      */
     public function getAllTrashed($table)
     {
+        
+        
         switch ($table) {
-            case 'report':
+            case 'reports':
                 return Models\Report::onlyTrashed()->get();
                 break;
-            case 'comment':
+            case 'comments':
                 return Models\Comment::onlyTrashed()->get();
                 break;
-            case 'image':
+            case 'images':
                 return Models\Image::onlyTrashed()->get();
                 break;
         }
