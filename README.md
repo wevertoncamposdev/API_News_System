@@ -1,6 +1,6 @@
-# Laravel Api RESTful - Sistema de Notícias
+# API - Sistema de Notícias
 
-trata-se de um sistema de postagem de notícias aonde é possivel inserir noticias com imagens e postar comentários para cada notícia.
+Trata-se de um sistema de postagem de notícias aonde é possivel inserir noticias com imagens e postar comentários para cada notícia.
 
 ## Desenvolvimento
 Para o ambiente de desenvolvimento foi utilizado o **PHP 8.1**, **Laravel 9** e **MySQL 5.4**.
