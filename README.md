@@ -42,12 +42,12 @@ Criar/Listar/Editar/Excluir uma nova noticia
 ```
   GET|HEAD        api/reports ............................................................................. reports.index › Api\CitieController@index  
   POST            api/reports ............................................................................. reports.store › Api\CitieController@store  
-  GET|HEAD        api/reports/{city} ........................................................................ reports.show › Api\CitieController@show  
-  PUT|PATCH       api/reports/{city} .................................................................... reports.update › Api\CitieController@update
-  DELETE          api/reports/{city} .................................................................. reports.destroy › Api\CitieController@destroy 
+  GET|HEAD        api/reports/{reports} ........................................................................ reports.show › Api\CitieController@show  
+  PUT|PATCH       api/reports/{reports} .................................................................... reports.update › Api\CitieController@update
+  DELETE          api/reports/{reports} .................................................................. reports.destroy › Api\CitieController@destroy 
 
   Exemplo de rota com uuid:
-  http://localhost/api/cities/8379fb45-d3da-4145-a38e-15badae5541a
+  http://localhost/api/reports/8379fb45-d3da-4145-a38e-15badae5541a
 
 ```
 
@@ -59,11 +59,11 @@ Criar/Listar/Editar/Excluir um novo comentário
 
 
 ```
-  GET|HEAD        api/comments ....................................................................... comments.index › Api\ProductController@index  
-  POST            api/comments ....................................................................... comments.store › Api\ProductController@store  
-  GET|HEAD        api/comments/{product} ............................................................... comments.show › Api\ProductController@show  
-  PUT|PATCH       api/comments/{product} ........................................................... comments.update › Api\ProductController@update  
-  DELETE          api/comments/{product} ......................................................... comments.destroy › Api\ProductController@destroy  
+  GET|HEAD        api/comments ....................................................................... comments.index › Api\CommentController@index  
+  POST            api/comments ....................................................................... comments.store › Api\CommentController@store  
+  GET|HEAD        api/comments/{comment} ............................................................... comments.show › Api\CommentController@show  
+  PUT|PATCH       api/comments/{comment} ........................................................... comments.update › Api\CommentController@update  
+  DELETE          api/comments/{comment} ......................................................... comments.destroy › Api\CommentController@destroy 
 
   Exemplo de rota com uuid:
   http://localhost/api/comments/8379fb45-d3da-4145-a38e-15badae5541a
@@ -78,20 +78,22 @@ Criar/Listar/Editar/Excluir uma nova imagem para a noticia
 
 
 ```
-  GET|HEAD        api/campaigns .................................................................... campaigns.index › Api\CampaignController@index  
-  POST            api/campaigns .................................................................... campaigns.store › Api\CampaignController@store  
-  GET|HEAD        api/campaigns/{campaign} ........................................................... campaigns.show › Api\CampaignController@show  
-  PUT|PATCH       api/campaigns/{campaign} ....................................................... campaigns.update › Api\CampaignController@update  
-  DELETE          api/campaigns/{campaign} ..................................................... campaigns.destroy › Api\CampaignController@destroy  
+  GET|HEAD        api/images ............................................................................. images.index › Api\ImageController@index  
+  POST            api/images ............................................................................. images.store › Api\ImageController@store  
+  GET|HEAD        api/images/{image} ....................................................................... images.show › Api\ImageController@show  
+  PUT|PATCH       api/images/{image} ................................................................... images.update › Api\ImageController@update  
+  DELETE          api/images/{image} ................................................................. images.destroy › Api\ImageController@destroy   
+  
   Exemplo de rota com uuid:
-  http://localhost/api/campaigns/8379fb45-d3da-4145-a38e-15badae5541a
+  http://localhost/api/image/8379fb45-d3da-4145-a38e-15badae5541a
 
 ```
 
 
 ## Route http://localhost/api/trash
 
-Criar/Listar/Editar/Excluir uma nova cidade
+Listar dados arquivados
+
 #### Visão Geral
 Ao deletar qualquer registro ele não será excluído do banco de dados, será arquivado e por meio desta rota é possível lista os registros arquivados.
 
@@ -103,7 +105,7 @@ Ao deletar qualquer registro ele não será excluído do banco de dados, será a
   DELETE          api/trash/{trash} ................................................................... trash.destroy › Api\TrashController@destroy 
 
   Exemplo da rota com o parametro ?table:
-  http://localhost/api/trash?table=cities
+  http://localhost/api/trash?table=reports
 
 ```
 
