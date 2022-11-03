@@ -4,23 +4,12 @@
 
 Para o desenvolvimento foi utilizado **Laravel 9**.
 
-Para o ambiente de desenvolvimento foi utilizado o **Laradock** definindo as versões mais atuais do **PHP** e **MySQL**.
+Para o ambiente de desenvolvimento foi utilizado o **PHP 8.1** e **MySQL 5.4**.
 
 Para facilitar o inicio da aplicação as configurações e teste neste repositório contem os arquivos de ambienação, reforço que não é uma boa prática, porém como é um sistema de testes e não contém informações sensíveis achei melhor manter para focar nos teste da api.
 
 
 ## Iniciando a aplicação
-
-Para iniciar a aplicação execute os seguintes comandos.
-
-```
-git clone https://github.com/wevertoncamposdev/apiprojectbywevertoncampos.git
-cd .\apiprojectbywevertoncampos\
-git clone https://github.com/wevertoncamposdev/laradock
-cd laradock 
-docker-compose up -d nginx mysql phpmyadmin
-docker-compose exec workspace bash 
-```
 
 Para criar o banco de dados e popular com registros para testes digite os seguintes comandos
 
@@ -40,7 +29,7 @@ Para realizar requisições de teste via **Postman** importe as coleções que e
 
 ```
 ## Model
-https://github.com/wevertoncamposdev/apiprojectbywevertoncampos/blob/main/public/Model.svg
+https://github.com/wevertoncamposdev/apiprojectbywevertoncampos/blob/main/public/model.pdf
 
 
 ### Observações Gerais
@@ -49,18 +38,9 @@ https://github.com/wevertoncamposdev/apiprojectbywevertoncampos/blob/main/public
 
 Pensando em **sergurança** foi utilizado o método **UUID** que gera um identificador único para o registro evitando passar o **ID** no frontend.
 
-De acordo com as funções definidas foi possível identificar que se trata de um sistema de campanhas de descontos para cada produto registrado na campanha que serão destinados a grupos de cidades.
-
-Neste modelo de negócio foi identificado a necessidade de criar pelo menos quatro tabelas **cities, products, groups, campaigns** e uma tabela pivot **campaign_product** já que existe a possibilidade de registrar vários produtos em várias campanhas.
-
-A relação de **groups** e **cities** foi realizado no modelo 1:N, visto que cada cidade possui somente um grupo. Porém dependendo do modelo de negócio onde haja a necessidade de manter a rastreabilidade dos registros, este modelo utilizado não é o ideal.
-
-A relação de **groups** e **campaign** foi realizado no modelo 1:N, visto que cada grupo possui somente uma campanha ativa. Aqui neste modelo percebemos também que não há rastreabilidade dos registros uma vez que alterada a campanha na tabela groups perdemos o registro da campanha anterior, é possível resolver isto gerando um pivot contendo uma coluna informando qual campanha está ativa, ou registrando datas de início e fim da campanha, onde a campanha mais próxima da data atual é a campanha ativa.
-
-A relação de **campaign** e **products** foi realizado no modelo N:N  com uma tabela pivot onde recebe o valor de desconto de cada produto pertencente a campanha, nesse modelo é possível atualizar os descontos sem alterar o valor do produto e cada produto tem seu desconto independente.
 
 De forma prática para manter a rastreabilidade dos dados foi utilizado o método softDeletes
-Para verificar os registros arquivados acesse a rota http://localhost/api/trash?table=cities passando a tabela como parametro.
+Para verificar os registros arquivados acesse a rota http://localhost/api/trash?table=reports passando a tabela como parametro.
 
 ```
 O softDeletesTz este método adiciona uma deleted_at TIMESTAMP coluna equivalente anulável (com fuso horário) com uma precisão opcional (total de dígitos). Esta coluna destina-se a armazenar o deleted_attimestamp necessário para a funcionalidade de "exclusão reversível" do Eloquent:
@@ -68,56 +48,55 @@ O softDeletesTz este método adiciona uma deleted_at TIMESTAMP coluna equivalent
 font: https://laravel.com/docs/9.x/migrations#column-method-softDeletesTz
 
 
+### Descrição da API
 
 
-## Route http://localhost/api/cities
 
-Criar/Listar/Editar/Excluir uma nova cidade
+
+## Route http://localhost/api/reports
+
+Criar/Listar/Editar/Excluir uma nova noticia
 
 #### Visão Geral
-Ao criar uma cidade ela recebe um uuid que será um parâmetro para criar os grupos de cidade ou para listar, atualizar e excluir uma cidade.
-
-Ao atualiza uma cidade é possível alterar o grupo.
 
 
 ```
-  GET|HEAD        api/cities ............................................................................. cities.index › Api\CitieController@index  
-  POST            api/cities ............................................................................. cities.store › Api\CitieController@store  
-  GET|HEAD        api/cities/{city} ........................................................................ cities.show › Api\CitieController@show  
-  PUT|PATCH       api/cities/{city} .................................................................... cities.update › Api\CitieController@update
-  DELETE          api/cities/{city} .................................................................. cities.destroy › Api\CitieController@destroy 
+  GET|HEAD        api/reports ............................................................................. reports.index › Api\CitieController@index  
+  POST            api/reports ............................................................................. reports.store › Api\CitieController@store  
+  GET|HEAD        api/reports/{city} ........................................................................ reports.show › Api\CitieController@show  
+  PUT|PATCH       api/reports/{city} .................................................................... reports.update › Api\CitieController@update
+  DELETE          api/reports/{city} .................................................................. reports.destroy › Api\CitieController@destroy 
 
   Exemplo de rota com uuid:
   http://localhost/api/cities/8379fb45-d3da-4145-a38e-15badae5541a
 
 ```
 
-## Route http://localhost/api/products
+## Route http://localhost/api/comments
 
-Criar/Listar/Editar/Excluir um produto
+Criar/Listar/Editar/Excluir um novo comentário
 #### Visão Geral
-Ao criar um produto ele recebe um uuid que servirá de parâmetro para criar as campanhas de descontos.
-Ao criar uma campanha é necessário enviar o uuid do produto e os descontos de cada produto.
+
 
 
 ```
-  GET|HEAD        api/products ....................................................................... products.index › Api\ProductController@index  
-  POST            api/products ....................................................................... products.store › Api\ProductController@store  
-  GET|HEAD        api/products/{product} ............................................................... products.show › Api\ProductController@show  
-  PUT|PATCH       api/products/{product} ........................................................... products.update › Api\ProductController@update  
-  DELETE          api/products/{product} ......................................................... products.destroy › Api\ProductController@destroy  
+  GET|HEAD        api/comments ....................................................................... comments.index › Api\ProductController@index  
+  POST            api/comments ....................................................................... comments.store › Api\ProductController@store  
+  GET|HEAD        api/comments/{product} ............................................................... comments.show › Api\ProductController@show  
+  PUT|PATCH       api/comments/{product} ........................................................... comments.update › Api\ProductController@update  
+  DELETE          api/comments/{product} ......................................................... comments.destroy › Api\ProductController@destroy  
 
   Exemplo de rota com uuid:
-  http://localhost/api/products/8379fb45-d3da-4145-a38e-15badae5541a
+  http://localhost/api/comments/8379fb45-d3da-4145-a38e-15badae5541a
 
 ```
 
-## Route http://localhost/api/campaigns
+## Route http://localhost/api/images
 
-Criar/Listar/Editar/Excluir uma nova campanha
+Criar/Listar/Editar/Excluir uma nova imagem para a noticia
 
 #### Visão Geral
-Ao criar uma campanha é possível adicionar os produtos com seus respectivos descontos. Ao atualizar uma campanha é possível atualizar os produtos existentes ou adicionar mais produtos . Faltou realizar a função de remoção dos produtos da campanha no momento na rota **products** au excluir um produto ele será automaticamente removido da campanha.
+
 
 ```
   GET|HEAD        api/campaigns .................................................................... campaigns.index › Api\CampaignController@index  
@@ -130,27 +109,6 @@ Ao criar uma campanha é possível adicionar os produtos com seus respectivos de
 
 ```
 
-## Route http://localhost/api/groups
-
-Criar/Listar/Editar/Excluir um novo grupo de cidades
-
-#### Visão Geral
-Ao criar um grupo de cidades é possível inserir uma campanha e as cidades pertencentes a este grupo.
-A campanha já retorna os dados de produtos e descontos registrados na campanha.
-Esta rota retorna todos os dados de cada groupo, informando as cidades que pertencem a este grupo, a campanha ativa e os produtos e descontos desta campanha.
-
-
-```
-  GET|HEAD        api/groups ............................................................................. groups.index › Api\GroupController@index  
-  POST            api/groups ............................................................................. groups.store › Api\GroupController@store  
-  GET|HEAD        api/groups/{group} ....................................................................... groups.show › Api\GroupController@show  
-  PUT|PATCH       api/groups/{group} ................................................................... groups.update › Api\GroupController@update  
-  DELETE          api/groups/{group} ................................................................. groups.destroy › Api\GroupController@destroy 
-
-  Exemplo de rota com uuid:
-  http://localhost/api/groups/8379fb45-d3da-4145-a38e-15badae5541a
-
-```
 
 ## Route http://localhost/api/trash
 
@@ -169,8 +127,6 @@ Ao deletar qualquer registro ele não será excluído do banco de dados, será a
   http://localhost/api/trash?table=cities
 
 ```
-
-
 
 
 ### Autor <br>
