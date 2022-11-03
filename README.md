@@ -8,7 +8,7 @@ Para o ambiente de desenvolvimento foi utilizado o **PHP 8.1**, **Laravel 9** e 
 Para facilitar o inicio da aplicação as configurações e teste neste repositório contem os arquivos de ambienação, reforço que não é uma boa prática, porém como é um sistema de testes e não contém informações sensíveis achei melhor manter para focar nos teste da api.
 
 ## Model
-https://github.com/wevertoncamposdev/apiprojectbywevertoncampos/blob/main/public/model.pdf
+https://github.com/wevertoncamposdev/API_News_System/blob/main/public/model.pdf
 
 
 ### Observações Gerais
