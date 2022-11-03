@@ -4,6 +4,9 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\DB;
 use App\Models\Report as Model;
+use App\Models\Comment;
+use App\Models\Image;
+
 
 use Exception;
 
@@ -25,7 +28,7 @@ class ReportService
         try {
 
             $data = $this->data->all();
-            return $data;
+            return $data->load('comments', 'images');
         } catch (Exception $e) {
 
             return $e->getMessage();
@@ -38,9 +41,9 @@ class ReportService
     public function getOnly($uuid)
     {
         try {
-
             $data = $this->data->whereUuid($uuid)->get();
-            return $data;
+            return $data->load('comments', 'images');
+
         } catch (Exception $ex) {
 
             return $ex->getMessage();
