@@ -7,26 +7,6 @@ Para o ambiente de desenvolvimento foi utilizado o **PHP 8.1**, **Laravel 9** e 
 
 Para facilitar o inicio da aplicação as configurações e teste neste repositório contem os arquivos de ambienação, reforço que não é uma boa prática, porém como é um sistema de testes e não contém informações sensíveis achei melhor manter para focar nos teste da api.
 
-
-## Iniciando a aplicação
-
-Para criar o banco de dados e popular com registros para testes digite os seguintes comandos
-
-```
-php artisan migrate --seed
-yes 
-
-```
-Após finalizar o processo de configuração é possível acessar http://localhost .
-
-Se for necessário é possível acessar o phpmyadmin http://localhost:8081
-
-Para realizar requisições de teste via **Postman** importe as coleções que estão na pasta
-
-```
-./postman
-
-```
 ## Model
 https://github.com/wevertoncamposdev/apiprojectbywevertoncampos/blob/main/public/model.pdf
 
