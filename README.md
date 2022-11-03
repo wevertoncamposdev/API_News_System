@@ -34,7 +34,7 @@ font: https://laravel.com/docs/9.x/migrations#column-method-softDeletesTz
 
 ## Route http://localhost/api/reports
 
-Criar/Listar/Editar/Excluir uma nova noticia
+Criar/Listar/Editar/Excluir uma nova notícia
 
 #### Visão Geral
 
@@ -108,7 +108,6 @@ Ao deletar qualquer registro ele não será excluído do banco de dados, será a
   http://localhost/api/trash?table=reports
 
 ```
-
 
 ### Autor <br>
 <img src="https://github.com/wevertoncamposdev.png" width=115><br><sub>Weverton Campos</sub>
