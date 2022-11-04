@@ -22,5 +22,3 @@ Route::apiResource('reports', \App\Http\Controllers\Api\ReportController::class)
 Route::apiResource('comments', \App\Http\Controllers\Api\CommentController::class);
 Route::apiResource('images', \App\Http\Controllers\Api\ImageController::class);
 Route::apiResource('trash', \App\Http\Controllers\Api\TrashController::class);
-
-
